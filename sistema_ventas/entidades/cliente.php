@@ -83,15 +83,15 @@ class Cliente
 
         $mysqli = new mysqli(Config::BBDD_HOST, Config::BBDD_USUARIO, Config::BBDD_CLAVE, Config::BBDD_NOMBRE, Config::BBDD_PORT);
         $sql = "UPDATE clientes SET
-                nombre = '$this->nombre',
-                cuit = '$this->cuit',
-                telefono = '$this->telefono',
-                correo = '$this->correo',
-                fecha_nac =  '$this->fecha_nac',
-                fk_idprovincia =  '$this->fk_idprovincia',
-                fk_idlocalidad =  '$this->fk_idlocalidad',
-                domicilio =  '$this->domicilio'
-                WHERE idcliente = $this->idcliente";
+                nombre = '" . $this->nombre . "',
+                cuit = '" . $this->cuit . "',
+                telefono = '" . $this->telefono . "',
+                correo = '" . $this->correo . "',
+                fecha_nac =  '" . $this->fecha_nac . "',
+                fk_idprovincia =  '" . $this->fk_idprovincia . "',
+                fk_idlocalidad =  '" . $this->fk_idlocalidad . "',
+                domicilio =  '" . $this->domicilio . "'
+                WHERE idcliente = " . $this->idcliente;
 
         if (!$mysqli->query($sql)) {
             printf("Error en query: %s\n", $mysqli->error . " " . $sql);
@@ -135,11 +135,7 @@ class Cliente
             $this->cuit = $fila["cuit"];
             $this->telefono = $fila["telefono"];
             $this->correo = $fila["correo"];
-            if(isset($fila["fecha_nac"])){
-                $this->fecha_nac = $fila["fecha_nac"];
-            } else {
-                $this->fecha_nac = "";
-            }
+            $this->fecha_nac = $fila["fecha_nac"];
             $this->fk_idprovincia = $fila["fk_idprovincia"];
             $this->fk_idlocalidad = $fila["fk_idlocalidad"];
             $this->domicilio = $fila["domicilio"];
@@ -176,11 +172,7 @@ class Cliente
                 $entidadAux->cuit = $fila["cuit"];
                 $entidadAux->telefono = $fila["telefono"];
                 $entidadAux->correo = $fila["correo"];
-                if(isset($fila["fecha_nac"])){
-                    $entidadAux->fecha_nac = $fila["fecha_nac"];
-                } else {
-                    $entidadAux->fecha_nac = "";
-                }
+                $entidadAux->fecha_nac = $fila["fecha_nac"];
                 $entidadAux->fk_idprovincia = $fila["fk_idprovincia"];
                 $entidadAux->fk_idlocalidad = $fila["fk_idlocalidad"];
                 $entidadAux->domicilio = $fila["domicilio"];
